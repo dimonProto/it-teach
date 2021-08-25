@@ -1,0 +1,28 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.dialogs_item{
+    padding: 10px;
+}
+.dialog{
+    padding: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+.dialog img{
+    max-width: 25px;
+}
+.dialog a{
+    text-decoration: none;
+    line-height: 25px;
+    color: black;
+}
+.dialog.active{
+    color: gold;
+}
+.messages{
+    padding: 10px;
+}

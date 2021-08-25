@@ -1,12 +1,15 @@
 import React from 'react'
 import MyPost from './Myposts/MyPost'
 import classes from './Profile.module.css'
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPostContainer from "./Myposts/MyPostContainer";
 
-const Profile = () => {
+const Profile = (props) => {
+
     return(
         <div>
-            <img src="https://m.iguides.ru/upload/iblock/637/6375946d9669a27030241e80ffa82b93.jpg"/>
-            <MyPost/>
+            <ProfileInfo/>
+            <MyPostContainer store={props.store} />
         </div>
     )
 }
