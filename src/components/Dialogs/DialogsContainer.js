@@ -1,30 +1,34 @@
-import React from "react";
-import classes from './Dialogs.module.css'
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
-import Breadcrumb from "../Breadcrumbs";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogsReducer";
+
+import {addMessageActionCreator} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+import React from "react";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 
 
 
-const DialogsContainer = (props) => {
 
-    let state = props.store.getState().dialogsPage
-
-
-    let onSendMessage = () =>{
-        // props.addMessage()
-        props.store.dispatch( addMessageActionCreator())
+let mapStateToProps = (state) => {
+    return {
+        dialogsPage: state.dialogsPage
     }
-    let onchangeMessageText = (body) => {
-        let changeMessage = updateNewMessageTextActionCreator(body)
-        props.store.dispatch( changeMessage )
-
+}
+let mapDispatchToProps = (dispatch) => {
+    return {
+        sendMessage: (newMessageBody) =>{
+            dispatch( addMessageActionCreator(newMessageBody))
+        }
     }
-    return <Dialogs updateNewMessageText={onchangeMessageText} sendMessage={onSendMessage} dialogsPage={state}/>
 }
 
-export default DialogsContainer;
+
+
+
+export default compose(
+    connect(mapStateToProps,mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);

@@ -1,11 +1,25 @@
 import React from 'react'
+import Preloader from "../../common/Preloader/Preloader";
+import userPhoto from "../../../assets/images/icons.png";
+import classes from './ProfileInfo.module.scss'
+import ProfileStatus from './ProfileStatus'
 
-// import classes from './ProfileInfo.module.css'
-
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+    if(!props.profile){
+        return <Preloader/>
+    }
     return(
         <div>
-            <img src="https://m.iguides.ru/upload/iblock/637/6375946d9669a27030241e80ffa82b93.jpg"/>
+
+            <div className={classes.cardBlock}>
+                <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto} alt={props.alt}/>
+                <div>
+
+                    <p className={classes.cardName}>{props.profile.fullName ? props.profile.fullName : 'не указано'}</p>
+                    <p className={classes.cardName}>{props.profile.aboutMe ? props.profile.aboutMe : 'не указано'}</p>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                </div>
+            </div>
         </div>
     )
 }

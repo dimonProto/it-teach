@@ -2,10 +2,11 @@ import React from 'react'
 import classes from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
+import {setBestFriends} from "../../redux/navReducer";
 
 const Nav = (props) => {
 
-    let friendsList = props.navPage.friends.map( f => <Friends name = { f.name}/>)
+     let friendsList = props.navPage.friends.map( f => <Friends key={f.id} name = { f.name}/>)
 
     return (
         <nav className={classes.nav}>
@@ -20,7 +21,7 @@ const Nav = (props) => {
                     <NavLink to='/news' activeClassName ={classes.active}>News</NavLink>
                 </div>
                 <div className={classes.item}>
-                    <NavLink to='/settings' activeClassName ={classes.active}>Settings</NavLink>
+                    <NavLink to='/users' activeClassName ={classes.active}>User</NavLink>
                 </div>
             </div>
 

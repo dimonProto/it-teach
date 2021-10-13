@@ -1,15 +1,15 @@
 import React from 'react'
-import MyPost from './Myposts/MyPost'
-import classes from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostContainer from "./Myposts/MyPostContainer";
+import {Redirect} from "react-router-dom";
 
 const Profile = (props) => {
 
+
     return(
         <div>
-            <ProfileInfo/>
-            <MyPostContainer store={props.store} />
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <MyPostContainer  />
         </div>
     )
 }

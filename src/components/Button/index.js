@@ -1,6 +1,5 @@
 import React from "react";
 import './Button.scss'
-import ButtonSearch from "./ButtonImg";
 
 
 const Button = (props) => {

@@ -6,7 +6,7 @@ const Friends = (props) => {
 
     return (
       <div className={classes.friendsGroup}>
-          <img className={classes.friendsImg} src="https://static.thenounproject.com/png/2366460-200.png"/>
+          <img className={classes.friendsImg} src="https://static.thenounproject.com/png/2366460-200.png"  alt={props.alt}/>
 
           <div>{props.name}</div>
       </div>

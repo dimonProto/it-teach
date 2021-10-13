@@ -2,11 +2,35 @@ import React from 'react'
 import classes from './MyPost.module.css'
 import Post from './Post/Post'
 import Accordion from "../../Accordeon/Accordeon";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
 import Button from "../../Button";
 import ButtonSearch from "../../Button/ButtonImg";
+import {Field, Form} from "react-final-form";
+import {composeValidators, maxLengthCreator, required} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormControls/FormsConrols";
 
 
+
+const AddNewPost = (props) => {
+
+    return (
+        <Form onSubmit={props.onSubmit}>
+            { props =>{
+                return (
+                    <form onSubmit={props.handleSubmit}>
+                        <Field
+                            name={'newPostBody'}
+                            type={'textarea'}
+                            component={Textarea}
+                            placeholder={'add Post'}
+                            validate={composeValidators(required, maxLengthCreator(18))}
+                        />
+                        <button type="submit">Add post</button>
+                    </form>
+                )
+            }}
+        </Form>
+    )
+}
 
 const list = [
     {
@@ -34,21 +58,15 @@ const list = [
 
 const MyPost = (props) => {
 
-    let PostElements = props.massPost.map( p => <Post message = { p.message } like = { p.like } />)
+    let PostElements = props.massPost.map( p => <Post message = { p.message } like = { p.like } key={p.id} />)
 
-    let newPostElement = React.createRef();
 
-    let addPost = () => {
-        props.addPost()
+
+    let addPost = (value) => {
+        props.addPost(value.newPostBody)
     }
 
-    let onPostChange = () => {
-        let text = newPostElement.current.value
-        props.updateNewPostText(text)
-        // let spreadElements = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-        // let spreadElements = updateNewPostTextActionCreator(text);
-        // props.dispatch( spreadElements )
-    }
+
 
     const ButtonAlert = () => {
         alert("work")
@@ -57,10 +75,9 @@ const MyPost = (props) => {
         <div>
 
             <div className={classes.posts}>
-                <div>
-                    <textarea onChange={ onPostChange } ref={ newPostElement } value={ props.newPostText } />
-                    <button onClick={ addPost }>add Post</button>
-                </div>
+
+                 <AddNewPost onSubmit={addPost}/>
+
                 <h1>posts</h1>
                 { PostElements }
                 <Accordion list={ list }/>
@@ -69,5 +86,7 @@ const MyPost = (props) => {
         </div>
     )
 }
+
+
 
 export default MyPost;
