@@ -6,3 +6,9 @@
 .active{
   color: gold;
 }
+.posts{
+  padding: 10px;
+}
+.posts button{
+  display: block;
+}

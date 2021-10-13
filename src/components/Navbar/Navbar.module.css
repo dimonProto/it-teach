@@ -1,9 +1,23 @@
 .nav{
   grid-area: n;
   background-color: rgb(165, 226, 165);
-
+  padding: 10px;
 }
 .item{
-  color: rgb(141, 0, 0);
+  margin-bottom: 3px;
+}
+.item a{
+  color: #fff;
   text-decoration: none;
+  cursor: pointer;
+}
+.item a.active{
+  color: gold;
+}
+.topNav{
+  margin-bottom: 25px;
+}
+.friends{
+  display: flex;
+  justify-content: space-between;
 }
