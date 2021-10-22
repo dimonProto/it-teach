@@ -7,11 +7,6 @@ import React from "react";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-
-
-
-
-
 let mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage
@@ -24,8 +19,6 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 }
-
-
 
 
 export default compose(
