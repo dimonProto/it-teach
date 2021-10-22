@@ -1,20 +1,27 @@
 import React from "react"
 import {connect} from "react-redux";
 import {
-    follow, getUsers,
+    follow, requestUsers,
     setCurrentPage,
     toggleIsFollowingProgress,
     unfollow
 } from "../../redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount, getUsers
+} from "../../redux/usersSelectors";
 
 class usersContainer extends React.Component {
 
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
-
+        const {currentPage,pageSize} = this.props
+        this.props.getUsers(currentPage,pageSize)
     }
 
     onPageChanged = (pageNumber) => {
@@ -27,7 +34,7 @@ class usersContainer extends React.Component {
         return <>
                {this.props.isFetching ? <Preloader/>: null}
                 <Users onPageChanged ={ this.onPageChanged}
-                           totalUsersCount ={this.props.totalUsersCount}
+                           totalItemCount ={this.props.totalItemCount}
                            pageSize={this.props.pageSize}
                            currentPage={this.props.currentPage}
                            users={this.props.users}
@@ -55,12 +62,12 @@ class usersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalItemCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 }
 
@@ -95,7 +102,7 @@ const UsersContainer = connect(mapStateToProps, {
     unfollow,
     setCurrentPage,
     toggleIsFollowingProgress,
-    getUsers
+    getUsers: requestUsers
 })(usersContainer)
 
 export default UsersContainer

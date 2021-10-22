@@ -30,9 +30,7 @@ export const usersAPI = {
         })
     },
     getMe() {
-        return instance.get(`auth/me`).then( response => {
-            return response.data
-        })
+        return instance.get(`auth/me`)
     }
 }
 

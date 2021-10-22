@@ -36,33 +36,29 @@ export const setAuthUserData = (id, login, email,isAuth,isConfirm) => ({type: SE
 
 export const setError = (error) => ({type: USER_ERRORS, payload:error})
 
-export const myData = () => {
-    return (dispatch) => {
-        return usersAPI.getMe().then(data => {
-            if( data.resultCode === 0){
-                let {id, login, email } = data.data
+export const myData = () =>  async (dispatch) => {
+        let response =  await usersAPI.getMe()
+            if( response.data.resultCode === 0){
+                let {id, login, email } = response.data.data
                 dispatch(setAuthUserData(id,login,email,true,))
             }
-        })
-    }
 }
 
-export const login = (email,password, rememberMe) => (dispatch) => {
-    authAPI.login(email,password, rememberMe).then(data => {
+export const login = (email,password, rememberMe) => async (dispatch) => {
+    let data = await authAPI.login(email,password, rememberMe)
         if( data.resultCode === 0){
             dispatch(myData())
         } else {
             dispatch(setError("Invalid credentials"))
         }
-    })
+
 }
 
-export const logout = () => (dispatch) => {
-    authAPI.logout().then(data => {
+export const logout = () => async (dispatch) => {
+    let data = await authAPI.logout()
         if( data.resultCode === 0){
             dispatch(setAuthUserData(null,null,null,false,))
         }
-    })
 }
 
 export default authReducer

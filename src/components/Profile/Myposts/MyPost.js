@@ -56,9 +56,9 @@ const list = [
 ]
 
 
-const MyPost = (props) => {
+const MyPost = React.memo(props => {
 
-    let PostElements = props.massPost.map( p => <Post message = { p.message } like = { p.like } key={p.id} />)
+    let PostElements = [...props.massPost].reverse().map( p => <Post message = { p.message } like = { p.like } key={p.id} />)
 
 
 
@@ -85,7 +85,7 @@ const MyPost = (props) => {
             </div>
         </div>
     )
-}
+})
 
 
 

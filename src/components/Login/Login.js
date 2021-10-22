@@ -47,11 +47,11 @@ const LoginForm = (props) => {
 }
 
 
-const Login = (props) => {
+const Login = ({login,isAuth,errors}) => {
 
-    const onSubmit = (formData) => props.login(formData.email,formData.password,formData.rememberMe)
+    const onSubmit = (formData) => login(formData.email,formData.password,formData.rememberMe)
 
-    if(props.isAuth){
+    if(isAuth){
       return  <Redirect to={'/profile'}/>
     }
 
@@ -60,7 +60,7 @@ const Login = (props) => {
             <h1>Login</h1>
             <LoginForm onSubmit={onSubmit}/>
 
-            {props.errors.map((el) => (
+            {errors.map((el) => (
                 <div>{el}</div>
             ))}
         </div>
