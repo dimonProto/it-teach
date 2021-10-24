@@ -7,7 +7,6 @@ export const withSuspense = (Component) => {
                       <Component {...props}/>
                   </React.Suspense>
         }
-
 }
 
 
